@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+
+.idea/
+
+venv/
+
+translators/
+
+nlidbTranslator/api/adapters/editsql/batch_processing/output/
+nlidbTranslator/api/adapters/editsql/evaluation/results/
+
+nlidbTranslator/api/schemas/processed/

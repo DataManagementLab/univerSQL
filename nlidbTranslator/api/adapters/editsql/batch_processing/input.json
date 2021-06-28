@@ -1,0 +1,26 @@
+[
+ {
+  "nl_question": "How many documents do we have ?",
+  "db_id": "cre_Doc_Template_Mgt"
+ },
+ {
+  "nl_question": "Return the names and template ids for documents that contain the letter w in their description .",
+  "db_id": "cre_Doc_Template_Mgt"
+ },
+ {
+  "nl_question": "Return the names and template ids for documents that contain the letter w in their name .",
+  "db_id": "cre_Doc_Template_Mgt"
+ },
+ {
+  "nl_question": "Return the first five template ids in ascending order .",
+  "db_id": "cre_Doc_Template_Mgt"
+ },
+ {
+  "nl_question": "Count the number of paragraphs in the document named Summer Show .",
+  "db_id": "cre_Doc_Template_Mgt"
+ },
+ {
+  "nl_question": "What are the name and budget of the departments with average instructor salary greater than the overall average ?",
+  "db_id": "college"
+ }
+]

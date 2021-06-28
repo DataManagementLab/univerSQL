@@ -1,0 +1,110 @@
+[
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "department_id"
+      ],
+      [
+        0,
+        "salary"
+      ],
+      [
+        1,
+        "id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "building"
+      ],
+      [
+        1,
+        "budget"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Id"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Department_Id"
+      ],
+      [
+        0,
+        "Salary"
+      ],
+      [
+        1,
+        "Id"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Building"
+      ],
+      [
+        1,
+        "Budget"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number"
+    ],
+    "db_id": "college",
+    "foreign_keys": [
+      [
+        5,
+        3
+      ]
+    ],
+    "primary_keys": [
+      1,
+      5
+    ],
+    "table_names": [
+      "instructor",
+      "department"
+    ],
+    "table_names_original": [
+      "Instructor",
+      "Department"
+    ]
+  }
+]

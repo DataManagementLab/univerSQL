@@ -1,0 +1,13 @@
+Django==3.1.2
+djangorestframework==3.11.1
+drf-yasg==1.17.1
+nltk==3.4
+numpy==1.19.2
+PyMySQL==0.10.1
+pattern
+progressbar
+sqlparse
+pytorch-pretrained-bert==0.5.1
+torch==1.4.0+cpu
+torchvision==0.5.0+cpu
+tqdm==4.31.1

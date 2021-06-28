@@ -1,0 +1,143 @@
+# Setup
+
+## System Requirements
+* Min. Python 3.6 incl. development tools
+* Virtualenv 
+* For production using uwsgi
+    - C compiler e.g. gcc
+    - uwsgi
+    - unzip
+    - uwsgi Python3 plugin `sudo apt-get install uwsgi-plugin-python3`  
+* For production using Apache (in addition to uwsgi)
+    - Apache2 `sudo apt-get install apache2`
+    - Apache2 Module mod_proxy_uwsgi e.g. `sudo apt-get install libapache2-mod-proxy-uwsgi`
+
+ 
+ 
+## Python Requirements
+* Pytorch 1.0
+* Python Requirements are listed in `requirements.txt` and can be installed with pip using `pip install -r requirements.txt`.
+
+## Project Setup  
+* Create a new directory that should contain the files in future e.g. `mkdir universql`
+* Change into that directory `cd universql`
+* Clone this repository `git clone URL .`
+
+ 
+### Automatic Downloads 
+
+1. Execute the setup bash script `Utils/setup_project.sh` (execute form project root)
+
+### Manual Downloads
+
+
+#### General
+  2. Download [Glove Embedding](https://nlp.stanford.edu/data/wordvecs/glove.42B.300d.zip) and put unzipped `glove.42B.300d.txt` under `translators/glove.42B.300d.txt`
+
+  3. Download [Spider Data](https://drive.google.com/uc?export=download&id=11icoH_EA-NYb0OrPTdehRWm_d7-DIzWX) and put `tables.json` under `nlidbTranslator/api/schemas/tables.json`
+
+#### EditSQL
+
+  4. Download the [pretrained BERT model](https://drive.google.com/file/d/1f_LEWVgrtZLRuoiExJa5fNzTS8-WcAX9/view?usp=sharing) and put `pytorch_model_uncased_L-12_H-768_A-12.bin` under `translators/editsql/model/bert/data/annotated_wikisql_and_PyTorch_bert_param/pytorch_model_uncased_L-12_H-768_A-12.bin`
+
+  5. Download the [trained model for Spider](https://drive.google.com/file/d/1KwXIdJBYKG0-PzCi1GvvSnUxJzxNq_CL/view?usp=sharing) and put `save_12` under `translators/editsql/logs/logs_spider_editsql/save_12`  
+
+  6. Download the [trained model for SParC](https://drive.google.com/file/d/1MRN3_mklw8biUphFxmD7OXJ57yS-FkJP/view) and put `save_31_sparc_editsql` under `translators/editsql/logs/logs_sparc_editsql/save_31_sparc_editsql`
+
+
+#### IRNet
+
+  7. Download [ConceptNet](https://drive.google.com/file/d/1LgyjtDmf3Xd1txwq8HwKD6d6VJj5pLmn/view?usp=sharing) and put `conceptNet` under `translators/IRNet/conceptNet`
+
+  8. Download the [pretranied model](https://drive.google.com/open?id=1VoV28fneYss8HaZmoThGlvYU3A-aK31q) and put `IRNet_pretrained.model` under `translators/IRNet/saved_model/IRNet_pretrained.model`
+
+## Development Setup
+
+1. Change into the project directory `cd universql`
+
+2. Create a virtual environment  `virtualenv venv -p python3`
+
+3. Activate virtualenv `source venv/bin/activate`
+
+4. Install PyTorch (torch and torchvision e.g. using `pip install torch==1.4.0+cpu torchvision==0.5.0+cpu -f https://download.pytorch.org/whl/torch_stable.html`)
+
+5. Install the python requirements `pip install -r requirements.txt`
+
+6. _For setup with EditSQL and IRNet (recommended):_ Initialize the submodules `git submodule update --init`
+
+7. _For setup with EditSQL and IRNet (recommended):_ Setup EditSQL for this project `python nlidbTranslator/build_editsql.py`
+
+   (_In case you chose setup without EditSQL and IRNet_: Delete the content of `nlidbTranslator/api/adapters` `rm -r nlidbTranslator/api/adapters/*`)
+   
+8. Setup Django databases `python nlidbTranslator/manage.py migrate`
+
+9. Create a privileged user `python manage.py createsuperuser` (credentials are entered interactively)
+
+10. Deactivate virtualenv `deactivate`
+
+## Development Server
+ 
+To start the application for development use `python manage.py runserver 0:8000` from the root directory.  
+Do not use this for deployment!
+
+In your browser access `https://127.0.0.1:8000/` and continue from there. The log access is limited to admin users. 
+
+## Deployment Setup
+This application can be deployed on Apache2 and uwsgi 
+
+### Step-by-step instruction
+1. Log into your system with a sudo user
+
+2. Install system requirements
+
+3. Create a directory e.g. `mkdir /srv/universql`
+
+4. Change to the new directory `cd /srv/universql`
+
+5. Clone this repository `git clone URL .`
+
+6. Create a virtual environment `virtualenv venv -p python3`
+
+7. Activate virtualenv `source venv/bin/activate`
+
+8. Setup the project `Utils/setup_project.sh` (execute form project root)
+
+9. Install PyTorch  (torch and torchvision e.g. using `pip install torch==1.4.0+cpu torchvision==0.5.0+cpu -f https://download.pytorch.org/whl/torch_stable.html`) and Python requirements using `pip install -r requirements.txt`  
+
+10. _For setup with EditSQL and IRNet (recommended):_ Setup EditSQL `python nlidbTranslator/build_editsql.py`
+
+11. Create the file `nlidbTranslator/nlidbTranslator/settings_secrets.py`  
+(copy from `nlidbTranslator/nlidbTranslator/settings_secrets.py.sample` e.g. using `cp nlidbTranslator/nlidbTranslator/settings_secrets.py.sample  nlidbTranslator/nlidbTranslator/settings_secrets.py`)  
+and fill it with the necessary secrets (e.g. generated by `tr -dc 'a-z0-9!@#$%^&*(-_=+)' < /dev/urandom | head -c50`) 
+
+12. Collect statics `python nlidbTranslator/manage.py collectstatic`
+
+13. Create a privileged user `python nlidbTranslator/manage.py createsuperuser` (credentials are entered interactively)
+
+14. Enable uwsgi proxy plugin for Apache e.g. `a2enmod proxy_uwsgi`
+
+15. Configure Apache: Add the following code snippet to the default configurations `/etc/apache2/sites-enabled/000-default.conf` within the VirtualHost tag
+    ```
+      Alias /static /srv/universql/nlidbTranslator/static
+      <Directory /srv/universql/nlidbTranslator/static>
+      Require all granted
+      </Directory>
+    
+      ProxyPassMatch ^/static/ !
+      ProxyPass / uwsgi://127.0.0.1:3035/
+    ```
+    OR: Create a new config (.conf) file (similar to  apache-nlidb.conf) replacing $SUMBDOMAIN with the subdomain the system should be available under. Disable the default configuration `a2dissite 000-default.conf`and copy the new config file to `/etc/apache2/sites-available/nlidb.conf`. Then symlink it to `sites-enabled` e.g. by using `ln -s /etc/apache2/sites-available/nlidb.conf /etc/apache2/sites-enabled/nlidb.conf` or enable it by using `a2ensite nlidb.conf`
+ 
+16. Point the subdomain, the system should be available under, to the adress of the server you deploy on e.g. with adding it to `/etc/hosts`
+
+17. Restart as apache `systemctl restart apache2.service`
+
+18. Create a dedicated user, e.g. `adduser django`
+
+19. Transfer ownership of the projects' directory to the new user `chown -R django:django /srv/universql`
+
+20. Copy the uswgi config file `uwsgi-nlidb.ini` to `/etc/uwsgi/apps-available/` using e.g. `cp /srv/universql/uwsgi-nlidb.ini /etc/uwsgi/apps-available/nlidb.ini` and enable it by Copying or symlinking it to `/etc/uwsgi/apps-enabled` using e.g. `ln -s /etc/uwsgi/apps-available/nlidb.ini /etc/uwsgi/apps-enabled/nlidb.ini`. 
+
+21. Start uwsgi using the configuration file `uwsgi --ini uwsgi-nlidb.ini`
+
+22. Restart uwsgi `systemctl restart uwsgi`
