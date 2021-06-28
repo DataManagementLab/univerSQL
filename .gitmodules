@@ -1,6 +1,0 @@
-[submodule "translators/editsql"]
-	path = translators/editsql
-	url = https://github.com/ryanzhumich/editsql
-[submodule "translators/IRNet"]
-	path = translators/IRNet
-	url = https://github.com/microsoft/IRNet.git
