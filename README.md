@@ -20,8 +20,8 @@ Currently, the following models from the Spider and SparC leaderboards are suppo
 
 | Approach name | Implemented by           | Links                                                   |
 | ------------- | ------------------------ | ------------------------------------------------------- |
-| EditSQL       | Hättasch, Geisler et al. | [Code](https://github.com/DataManagementLab/univerSQL/tree/master/nlidbTranslator/api/adapters/editsql) - [Original Code](https://github.com/ryanzhumich/editsql) |
-| IRNet       | Hättasch, Geisler et al. | [Code](https://github.com/DataManagementLab/univerSQL/tree/master/nlidbTranslator/api/adapters/IRNet) - [Original Code](https://github.com/microsoft/IRNet) |
+| EditSQL       | Hättasch, Geisler et al. | [Code](https://github.com/DataManagementLab/univerSQL/tree/main/nlidbTranslator/api/adapters/editsql) - [Original Code](https://github.com/ryanzhumich/editsql) |
+| IRNet       | Hättasch, Geisler et al. | [Code](https://github.com/DataManagementLab/univerSQL/tree/main/nlidbTranslator/api/adapters/IRNet) - [Original Code](https://github.com/microsoft/IRNet) |
 
 You implemented a wrapper and installation script for another approach? Feel free to either contribute by opening a pull request or contacting us to have the link to your codebase intregrated here.
 
