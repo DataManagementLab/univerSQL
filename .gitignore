@@ -5,7 +5,6 @@ __pycache__/
 
 venv/
 
-translators/
 
 nlidbTranslator/api/adapters/editsql/batch_processing/output/
 nlidbTranslator/api/adapters/editsql/evaluation/results/
