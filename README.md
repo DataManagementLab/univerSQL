@@ -1,6 +1,6 @@
 # UniverSQL
 
-In this Repo we provide an NLIDB API for use with models from the [Spider](https://yale-lily.github.io/spider) and [SparC](https://yale-lily.github.io/sparc) challenges.
+In this repo we provide an NLIDB API for use with models from the [Spider](https://yale-lily.github.io/spider) and [SparC](https://yale-lily.github.io/sparc) challenges.
 
 UniverSQL is a small python application that can be used as translation server.
 The API allows unified access to most important functions (select a database, select a translator, do the actual translation) and to some convenience and debugging functions like logging.
