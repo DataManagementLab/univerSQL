@@ -31,7 +31,17 @@ You implemented a wrapper and installation script for another approach? Feel fre
 If you are using our API for our research, please cite it as follows:
 
 ```
-Benjamin Hättasch, Nadja Geisler, and Carsten Binnig: Under submission, coming soon
+@InProceedings{Netted,
+  title     = {Netted?! How to Improve the Usefulness of Spider & Co.},
+  author    = {Benjamin Hättasch and Nadja Geisler and Carsten Binnig},
+  booktitle = {Proceedings of the Second International Conference on Design of Experimental Search & Information REtrieval Systems},
+  year      = {2021},
+  address   = {Padova, Italy},
+  publisher = {CEUR-WS.org},
+  url = {http://ceur-ws.org/Vol-2950/paper-08.pdf},
+  pages = {38-43},
+  editor = {Omar Alonso and Stefano Marchesin and Marc Najork and Gianmaria Silvello}, 
+}
 ```
 
 You probably also want to cite Spider and SparC in that case:
